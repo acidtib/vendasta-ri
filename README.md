@@ -18,7 +18,10 @@ Or install it yourself as:
 
 ## Configuration
 
-TODO: Write configuration instructions here
+Create an initializer (vendasta.rb)
+
+		ENV["VENDASTA_RI_APIUSER"] = "apiUser"
+		ENV["VENDASTA_RI_APIKEY"] = "apiKey"
 
 ## Usage
 
