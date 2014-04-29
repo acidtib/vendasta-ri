@@ -110,6 +110,16 @@ module Vendasta
 		    end
 		  end
 
+		  def self.getReviewStatistics(customerIdentifier) # Get Review Statistics
+		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/review/getStats/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier})
+
+		  	if response.success?
+		    	response = JSON.parse(response.body)
+		    else
+		      response = JSON.parse(response.body)
+		    end
+		  end
+
 		end
 
   end
