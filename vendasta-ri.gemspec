@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Vendasta::Ri::VERSION
   spec.authors       = ["Dan Vera"]
   spec.email         = ["dan@yovu.co"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Vendasta - Reputation Intelligence}
+  spec.description   = %q{Vendasta - Reputation Intelligence}
   spec.homepage      = "https://github.com/drkyro/vendasta-ri"
   spec.license       = "MIT"
 
