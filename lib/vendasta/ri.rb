@@ -1,8 +1,28 @@
 require "vendasta/ri/version"
+require "httparty"
 
 module Vendasta
-	def self.ipsum
-    "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+	module Ri
+
+		include HTTParty
+
+		
+
+		def self.ipsum
+			"hi"
+  	end
+
+  	def self.lookupAccounts
+	    response = HTTParty.get("https://reputation-intelligence-api.vendasta.com/api/v2/account/lookup/", :query => {:apiUser => "IANA", :apiKey => "sYMzAf3ZZm1wPMK0cKYJfXQDSpZJXwA6XaS7F3dz"})
+
+	    if response.success?
+	    	response = JSON.parse(response.body)
+	    else
+	      # this just raises the net/http response that was raised
+	      puts "no"
+	    end
+	  end
+
   end
 end
 
