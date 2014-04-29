@@ -17,6 +17,7 @@ module Vendasta
 			puts ENV["VENDASTA_RI_APIKEY"]
   	end
 
+  	## Accounts
   	def self.lookupAccounts # Lookup Accounts
 	    response = HTTParty.get("#{OPTIONS[:endpoint]}/account/lookup/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"]})
 
