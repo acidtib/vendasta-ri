@@ -32,8 +32,18 @@ module Vendasta
 
 
 	  ## Visibility
-	  def self.lookupListing(customerIdentifier)
+	  def self.lookupListings(customerIdentifier) # Lookup Listings
 	  	response = HTTParty.get("#{OPTIONS[:endpoint]}/visibility/lookupListings/", :query => {:apiUser => OPTIONS[:apiUser], :apiKey => OPTIONS[:apiKey], :customerIdentifier => customerIdentifier})
+
+	  	if response.success?
+	    	response = JSON.parse(response.body)
+	    else
+	      response = JSON.parse(response.body)
+	    end
+	  end
+
+	  def self.lookupPossibleListings(customerIdentifier) # Lookup Possible Listings
+	  	response = HTTParty.get("#{OPTIONS[:endpoint]}/visibility/lookupPossibleListings/", :query => {:apiUser => OPTIONS[:apiUser], :apiKey => OPTIONS[:apiKey], :customerIdentifier => customerIdentifier})
 
 	  	if response.success?
 	    	response = JSON.parse(response.body)
