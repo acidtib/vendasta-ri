@@ -80,7 +80,7 @@ module Vendasta
 	  ## Reviews
 	  module Reviews
 
-		  def self.getVisibilityStats(customerIdentifier, reviewId) # Get Reviews by ID
+		  def self.getReview(customerIdentifier, reviewId) # Get Reviews by ID
 		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/review/get/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier, :reviewId => reviewId})
 
 		  	if response.success?
@@ -112,6 +112,31 @@ module Vendasta
 
 		  def self.getReviewStatistics(customerIdentifier) # Get Review Statistics
 		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/review/getStats/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier})
+
+		  	if response.success?
+		    	response = JSON.parse(response.body)
+		    else
+		      response = JSON.parse(response.body)
+		    end
+		  end
+
+		end
+
+		## Mentions
+		module Mentions
+
+			def self.searchMentions(customerIdentifier) # Search Mentions
+		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/mention/search/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier})
+
+		  	if response.success?
+		    	response = JSON.parse(response.body)
+		    else
+		      response = JSON.parse(response.body)
+		    end
+		  end
+
+		  def self.getMention(customerIdentifier, mentionId) # Get Mentions by ID
+		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/mention/get/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier, :mentionId => mentionId})
 
 		  	if response.success?
 		    	response = JSON.parse(response.body)
