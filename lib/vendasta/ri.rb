@@ -147,6 +147,21 @@ module Vendasta
 
 		end
 
+		## Social
+		module Social
+
+			def self.getSocialStats(customerIdentifier) # Get Social Stats
+		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/social/getStats/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier})
+
+		  	if response.success?
+		    	response = JSON.parse(response.body)
+		    else
+		      response = JSON.parse(response.body)
+		    end
+		  end
+
+		end
+
   end
 end
 
