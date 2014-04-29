@@ -26,7 +26,18 @@ module Vendasta
 	    if response.success?
 	    	response = JSON.parse(response.body)
 	    else
-	      # this just raises the net/http response that was raised
+	      response = JSON.parse(response.body)
+	    end
+	  end
+
+
+	  ## Visibility
+	  def self.lookupListing(customerIdentifier)
+	  	response = HTTParty.get("#{OPTIONS[:endpoint]}/visibility/lookupListings/", :query => {:apiUser => OPTIONS[:apiUser], :apiKey => OPTIONS[:apiKey], :customerIdentifier => customerIdentifier})
+
+	  	if response.success?
+	    	response = JSON.parse(response.body)
+	    else
 	      response = JSON.parse(response.body)
 	    end
 	  end
