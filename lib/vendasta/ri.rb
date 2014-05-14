@@ -101,7 +101,7 @@ module Vendasta
 		  end
 
 		  def self.searchReviews(customerIdentifier) # Search Reviews
-		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/review/search/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier})
+		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/review/search/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier, :pageSize => '500'})
 
 		  	if response.success?
 		    	response = JSON.parse(response.body)
@@ -111,7 +111,7 @@ module Vendasta
 		  end
 
 		  def self.getReviewStatistics(customerIdentifier) # Get Review Statistics
-		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/review/getStats/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier, :pageSize => '500'})
+		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/review/getStats/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier})
 
 		  	if response.success?
 		    	response = JSON.parse(response.body)
@@ -127,6 +127,16 @@ module Vendasta
 
 			def self.searchMentions(customerIdentifier) # Search Mentions
 		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/mention/search/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier})
+
+		  	if response.success?
+		    	response = JSON.parse(response.body)
+		    else
+		      response = JSON.parse(response.body)
+		    end
+		  end
+
+		  def self.searchMentionsType(customerIdentifier, type, pageSize) # Search Mentions by type
+		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/mention/search/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier, :type => type, :pageSize => pageSize})
 
 		  	if response.success?
 		    	response = JSON.parse(response.body)
