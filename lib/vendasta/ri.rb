@@ -101,7 +101,17 @@ module Vendasta
 		  end
 
 		  def self.searchReviews(customerIdentifier) # Search Reviews
-		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/review/search/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier, :pageSize => '500'})
+		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/review/search/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier})
+
+		  	if response.success?
+		    	response = JSON.parse(response.body)
+		    else
+		      response = JSON.parse(response.body)
+		    end
+		  end
+
+		  def self.searchReviewsbyPagesize(customerIdentifier, pageSize) # Search Reviews
+		  	response = HTTParty.get("#{OPTIONS[:endpoint]}/review/search/", :query => {:apiUser => ENV["VENDASTA_RI_APIUSER"], :apiKey => ENV["VENDASTA_RI_APIKEY"], :customerIdentifier => customerIdentifier, :pageSize => pageSize})
 
 		  	if response.success?
 		    	response = JSON.parse(response.body)
